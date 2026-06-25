@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import { connectDatabase } from './config/database';
 import usersRouter from './routes/users';
 import teamsRouter from './routes/teams';
 import activitiesRouter from './routes/activities';
@@ -15,11 +15,10 @@ const PORT = Number(process.env.PORT || 8000);
 // Codespaces-aware API base URL
 const CODESPACE_NAME = process.env.CODESPACE_NAME;
 const API_BASE_URL = CODESPACE_NAME
-  ? `https://${CODESPACE_NAME}-8000.githubpreview.dev`
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
   : `http://localhost:${PORT}`;
 
-mongoose
-  .connect(MONGODB_URI)
+connectDatabase()
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
