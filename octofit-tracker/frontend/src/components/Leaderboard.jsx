@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 const CODESPACE = import.meta.env.VITE_CODESPACE_NAME as string | undefined;
 const API_BASE = CODESPACE && CODESPACE.length > 0
-  ? `https://${CODESPACE}-8000.app.github.dev/api`
-  : `http://localhost:8000/api`;
+  ? `https://${CODESPACE}-8000.app.github.dev/api/leaderboard`
+  : `http://localhost:8000/api/leaderboard`;
 
 function parseListResponse<T>(body: any): T[] {
   if (!body) return [];
@@ -21,7 +21,7 @@ export default function Leaderboard() {
   const [entries, setEntries] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${API_BASE}/leaderboard`)
+    fetch(`${API_BASE}`)
       .then((r) => r.json())
       .then((body) => setEntries(parseListResponse(body.leaderboard ?? body)))
       .catch(() => setEntries([]));

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 const CODESPACE = import.meta.env.VITE_CODESPACE_NAME as string | undefined;
 const API_BASE = CODESPACE && CODESPACE.length > 0
-  ? `https://${CODESPACE}-8000.app.github.dev/api`
-  : `http://localhost:8000/api`;
+  ? `https://${CODESPACE}-8000.app.github.dev/api/users`
+  : `http://localhost:8000/api/users`;
 
 function parseListResponse<T>(body: any): T[] {
   if (!body) return [];

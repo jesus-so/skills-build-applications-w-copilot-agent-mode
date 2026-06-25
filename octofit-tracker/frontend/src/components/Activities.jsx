@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 const CODESPACE = import.meta.env.VITE_CODESPACE_NAME as string | undefined;
 const API_BASE = CODESPACE && CODESPACE.length > 0
-  ? `https://${CODESPACE}-8000.app.github.dev/api`
-  : `http://localhost:8000/api`;
+  ? `https://${CODESPACE}-8000.app.github.dev/api/activities`
+  : `http://localhost:8000/api/activities`;
 
 function parseListResponse<T>(body: any): T[] {
   if (!body) return [];
@@ -21,7 +21,7 @@ export default function Activities() {
   const [activities, setActivities] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${API_BASE}/activities`)
+    fetch(`${API_BASE}`)
       .then((r) => r.json())
       .then((body) => setActivities(parseListResponse(body.activities ?? body)))
       .catch(() => setActivities([]));

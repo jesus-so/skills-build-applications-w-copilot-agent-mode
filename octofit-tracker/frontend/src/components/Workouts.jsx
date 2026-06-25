@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 const CODESPACE = import.meta.env.VITE_CODESPACE_NAME as string | undefined;
 const API_BASE = CODESPACE && CODESPACE.length > 0
-  ? `https://${CODESPACE}-8000.app.github.dev/api`
-  : `http://localhost:8000/api`;
+  ? `https://${CODESPACE}-8000.app.github.dev/api/workouts`
+  : `http://localhost:8000/api/workouts`;
 
 function parseListResponse<T>(body: any): T[] {
   if (!body) return [];
@@ -21,7 +21,7 @@ export default function Workouts() {
   const [workouts, setWorkouts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${API_BASE}/workouts`)
+    fetch(`${API_BASE}`)
       .then((r) => r.json())
       .then((body) => setWorkouts(parseListResponse(body.workouts ?? body)))
       .catch(() => setWorkouts([]));
