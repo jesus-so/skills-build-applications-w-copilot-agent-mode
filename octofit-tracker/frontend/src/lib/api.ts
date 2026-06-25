@@ -1,6 +1,10 @@
-const CODESPACE = import.meta.env.VITE_CODESPACE_NAME;
+// Vite env: define VITE_CODESPACE_NAME in .env.local when using Codespaces preview.
+// Example .env.local:
+//   VITE_CODESPACE_NAME=my-codespace-name
+// If unset, the code falls back to localhost to avoid building undefined URLs.
+const CODESPACE = import.meta.env.VITE_CODESPACE_NAME as string | undefined;
 
-const API_BASE = CODESPACE
+const API_BASE = CODESPACE && CODESPACE.length > 0
   ? `https://${CODESPACE}-8000.app.github.dev/api`
   : `http://localhost:8000/api`;
 
